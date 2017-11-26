@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Notes</title>
+  <link rel="stylesheet" href="notes.css"></link>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="notes.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <div class="toolbar">
+      <button class="toolbar-button">New</button>
+      <button class="toolbar-button">Delete</button>
+      <input class="toolbar-search" type="text" placeholder="Search...">
+    </div>
+    <div class="note-container">
+      <div class="note-selectors">
+        
+        <div class="note-selectors">
+          <div class="note-selector" v-for="note in transformedNotes">
+            <p class="note-selector-title">{{ note.body | formatTitle }}</p>
+            <p class="note-selector-timestamp">{{ note.timestamp | formatTimestamp }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="note-editor">
+        <p class="note-editor-info">Timestamp here...</p>
+        <textarea class="note-editor-input">
+          First note...
+          
+          Note text here...
+        </textarea>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
