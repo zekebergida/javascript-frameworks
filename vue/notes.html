@@ -10,29 +10,32 @@
 <body>
   <div id="app">
     <div class="toolbar">
-      <button class="toolbar-button">New</button>
-      <button class="toolbar-button">Delete</button>
-      <input class="toolbar-search" type="text" placeholder="Search...">
+      <button class="toolbar-button" v-on:click="createNote()">New</button>
+      <button class="toolbar-button" v-on:click="deleteNote()">Delete</button>
+      <input class="toolbar-search" type="text" placeholder="Search..." v-model="searchNoteText">
     </div>
     <div class="note-container">
       <div class="note-selectors">
-        
-        <div class="note-selectors">
-          <div class="note-selector" v-for="note in transformedNotes">
-            <p class="note-selector-title">{{ note.body | formatTitle }}</p>
-            <p class="note-selector-timestamp">{{ note.timestamp | formatTimestamp }}</p>
-          </div>
+        <div class="note-selector"
+          v-for="note in transformedNotes"
+          v-on:click="selectNote(note)"
+          v-bind:class="{active: note === selectedNote}"
+        >
+          <p class="note-selector-title">
+            {{ note.body | formatTitle }}
+          </p>
+          <p class="note-selector-timestamp">
+            {{ note.timestamp | formatTimestamp }}
+          </p>
         </div>
       </div>
       <div class="note-editor">
-        <p class="note-editor-info">Timestamp here...</p>
-        <textarea class="note-editor-input">
-          First note...
-          
-          Note text here...
+        <p class="note-editor-info">
+          {{ selectedNote.timestamp | formatTimestamp }}
+        </p>
+        <textarea class="note-editor-input" v-model="selectedNote.body">
         </textarea>
       </div>
-    </div>
   </div>
 </body>
 </html>
